@@ -1,0 +1,768 @@
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 112.6925', 'loss_test: 111.9005', 'time: 0.0130s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 1007.9534', 'loss_test: 952.4412', 'time: 0.3180s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 250.1835', 'loss_test: 243.9542', 'time: 0.3352s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 132.8417', 'loss_test: 134.6884', 'time: 0.3422s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 399.1728', 'loss_test: 374.4961', 'time: 0.3280s')
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 114.0698', 'loss_test: 113.7653', 'time: 0.5840s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 124.8183', 'loss_test: 123.4238', 'time: 0.4728s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 136.8609', 'loss_test: 139.0387', 'time: 0.6704s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 76027.1719', 'loss_test: 71092.6406', 'time: 0.2987s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 250.4314', 'loss_test: 298.3815', 'time: 0.3122s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 7827.8818', 'loss_test: 7328.8228', 'time: 0.3470s')
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 173.0330', 'loss_test: 178.1983', 'time: 0.3390s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 27560.2754', 'loss_test: 25230.6562', 'time: 0.3338s')
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 534.7546', 'loss_test: 569.7946', 'time: 0.3423s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 2868.3640', 'loss_test: 2634.1472', 'time: 0.4300s')
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 126.4664', 'loss_test: 130.5486', 'time: 0.0081s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 112.6921', 'loss_test: 111.9005', 'time: 0.0127s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 114.0698', 'loss_test: 113.7653', 'time: 0.3253s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 132.8417', 'loss_test: 134.6884', 'time: 0.3318s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 399.1728', 'loss_test: 374.4961', 'time: 0.3094s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 1007.9534', 'loss_test: 952.4412', 'time: 0.2798s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 250.1835', 'loss_test: 243.9542', 'time: 0.3109s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 124.8183', 'loss_test: 123.4238', 'time: 0.3167s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 136.8609', 'loss_test: 139.0387', 'time: 0.2906s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 126.4660', 'loss_test: 130.5486', 'time: 0.0132s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 7827.8818', 'loss_test: 7328.8228', 'time: 0.2769s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 76027.1719', 'loss_test: 71092.6406', 'time: 0.3344s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 27560.2754', 'loss_test: 25230.6562', 'time: 0.3203s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 173.0330', 'loss_test: 178.1983', 'time: 0.3090s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 250.4314', 'loss_test: 298.3815', 'time: 0.3103s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 534.7546', 'loss_test: 569.7946', 'time: 0.3079s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
+--- Logging error ---
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/opt/conda/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/codespace/fairness/encoder_decoder4/main.py", line 333, in <module>
+    main(path)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 321, in main
+    dataset_test_s = train_vae(dataset, 'race', s_feature, 'models_save/vae.pt')
+  File "/codespace/fairness/encoder_decoder4/main.py", line 295, in train_vae
+    in_train_vae(args.epochs_vae, model, optimizer_vae, data_vae, dataset['data'][s_f], s_feature, trn_idx, val_idx, tst_idx)
+  File "/codespace/fairness/encoder_decoder4/main.py", line 279, in in_train_vae
+    logger.info('Epoch: {:04d}'.format(epoch + 1),
+Message: 'Epoch: 0001'
+Arguments: ('loss_train: 2868.3640', 'loss_test: 2634.1472', 'time: 0.5205s')
+loading dataset:  law
+select races:  ['White', 'Black', 'Asian']
