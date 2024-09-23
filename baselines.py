@@ -52,7 +52,7 @@ def run_unaware(x, y, train_idx, test_idx, type='linear'):
 
 def run_cfp_u(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
     if args.dataset == 'law':
-        model = CausalModel_law('cfpu_law').to(device)
+        model = CausalModel_law(args, 'cfpu_law').to(device)
         data_save = to_tensor(data_save)
         model, guide = train_casual(model, data_save, train_idx)
         data_return = guide()
@@ -61,7 +61,7 @@ def run_cfp_u(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
         x_fair_train, x_fair_test, data_y_train = x_fair[train_idx], x_fair[test_idx], data_y[train_idx]
         
     elif args.dataset == 'adult':
-        model = CausalModel_adult('cfpu_adult').to(device)
+        model = CausalModel_adult(args, 'cfpu_adult').to(device)
         data_save = to_tensor(data_save)
         model, guide = train_casual(model, data_save, train_idx)
         data_return = guide()
@@ -85,9 +85,9 @@ def run_cfp_u(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
 
 def run_cfp_up(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
     if args.dataset == 'law':
-        model = CausalModel_law_up('cfpup').to(device)
+        model = CausalModel_law_up(args, 'cfpup').to(device)
     elif args.dataset == 'adult':
-        model = CausalModel_adult_up('cfpup').to(device)
+        model = CausalModel_adult_up(args, 'cfpup').to(device)
     # data_save = to_tensor(data_save)
     model, guide = train_casual_up(model, data_save, train_idx)
     
@@ -182,18 +182,12 @@ def train_casual_up(model, data_save, train_idx):
     def elbo_loss(model, guide, *_args, **kwargs):
         global cc
         # a, b = pyro.poutine.trace(model).get_trace().nodes["sp"]["value"], pyro.poutine.trace(model).get_trace().nodes["sp"]["value"]
-        if args.dataset == 'law':
-            guide_a, guide_b = pyro.poutine.trace(guide).get_trace(*_args, **kwargs).nodes["sp"]["value"], \
+        guide_a, guide_b = pyro.poutine.trace(guide).get_trace(*_args, **kwargs).nodes["sp"]["value"], \
                            pyro.poutine.trace(guide).get_trace(*_args, **kwargs).nodes["spp"]["value"]
-        elif args.dataset == 'adult':
-            guide_a, guide_b = 0, 0 # !!!!!
 
         # # ELBO 损失 + 自定义损失
         elbo_loss = Trace_ELBO().differentiable_loss(model, guide, *_args, **kwargs)
-        if args.dataset == 'law':
-            customloss = args.alpha * custom_loss(guide_a, guide_b) # !!!!!
-        if args.dataset == 'adult':
-            customloss = 0 # !!!!!
+        customloss = args.alpha * custom_loss(guide_a, guide_b) # !!!!!
         loss = elbo_loss + customloss
         if cc % 1000 == 0:
             logger.info(f"elbo_loss:{elbo_loss}, custom_loss:{customloss}")

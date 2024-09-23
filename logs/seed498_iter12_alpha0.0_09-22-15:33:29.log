@@ -1,5 +1,0 @@
-2024-09-22 15:33:29,693: Namespace(cudanum=6, dataset='law', synthetic=1, seed=498, training=1, pyromodel='models_save/cfpup.pt', pyroparam='models_save/cfpup_param.pt', lrcausalmodel=0.001, alpha=0.0, num_iterations_causalmodel=12, epochs_vae=10, decoder_type='together', lr=0.002)
-2024-09-22 15:33:29,694: Namespace(cudanum=6, dataset='law', synthetic=1, seed=498, training=1, pyromodel='models_save/cfpup.pt', pyroparam='models_save/cfpup_param.pt', lrcausalmodel=0.001, alpha=0.0, num_iterations_causalmodel=12, epochs_vae=10, decoder_type='together', lr=0.002)
-2024-09-22 15:33:29,726: =========== evaluation for constant predictor ================: {'RMSE': 0.9244631754313428, 'MAE': 0.748272444385343}
-2024-09-22 15:33:29,729: =========== evaluation for full predictor ================: {'RMSE': 0.8736367934793963, 'MAE': 0.6996570161273481}
-2024-09-22 15:33:29,731: =========== evaluation for unaware predictor ================: {'RMSE': 0.8857783391469088, 'MAE': 0.7111336727143541}

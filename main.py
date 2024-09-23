@@ -77,7 +77,7 @@ def get_cf_pred(model_name, model, data_cf_tst, s_cf):
                 x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['MaritalStatus'],
                      data_cf_tst[si]['Occupation'], data_cf_tst[si]['EducationNum'],
                      data_cf_tst[si]['HoursPerWeek'], data_cf_tst[si]['Race']], dim=1).cpu().detach().numpy()
-            elif model_name == 'CFP-U':
+            elif model_name == 'cfpup' or model_name == 'cfpu':
                 #x_fair = data_latent_list.cpu().detach().numpy()  # n x 1
                 x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['eps_MaritalStatus'],data_cf_tst[si]['eps_EducationNum'],
                                     data_cf_tst[si]['eps_Occupation'],data_cf_tst[si]['eps_HoursPerWeek'],
@@ -91,12 +91,8 @@ def get_cf_pred(model_name, model, data_cf_tst, s_cf):
                 y_pred_si = np.full((tst_size, 1), model)
 
         if model_name != 'constant':
-            breakpoint()
             if args.dataset == 'adult':  # y_prob
-                try:
-                    y_pred_si = model.predict_proba(x_fair)[:, 1]
-                except:
-                    breakpoint()
+                y_pred_si = model.predict_proba(x_fair)[:, 1]
             else: # y_hat
                 y_pred_si = model.predict(x_fair)
             
@@ -304,10 +300,8 @@ def in_train_vae(epochs, model, optimizer, data, data_s, s_cf, trn_idx, val_idx,
         if epoch % 100 == 0:
             model.eval()
             eval_result_tst = test_vae(model, tst_idx, data, data_s, s_cf)
-            logger.info('Epoch: {:04d}'.format(epoch + 1),
-                  'loss_train: {:.4f}'.format(loss.item()),
-                  'loss_test: {:.4f}'.format(eval_result_tst['loss'].item()),
-                  'time: {:.4f}s'.format(time.time() - time_begin))
+            loss_test = eval_result_tst['loss'].item()
+            logger.info(f'Epoch: {epoch + 1:04d}, loss_train: {loss.item():.4f}, loss_test: {loss_test:.4f}, time: {(time.time() - time_begin):.4f}s')
             model.train()
 
     return model

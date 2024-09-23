@@ -12,6 +12,7 @@ from pyro.nn import PyroModule, PyroSample
 from pyro.infer.autoguide import AutoDiagonalNormal
 from pyro.infer import SVI, Trace_ELBO, Predictive
 from pyro.poutine.trace_messenger import TraceMessenger
+import pyro.distributions.constraints as constraints
 
 
 pyro.enable_validation(True)
@@ -40,8 +41,10 @@ def onehot_to_int(var):
     return var_int
 
 class CausalModel_law(PyroModule):
-    def __init__(self, model_name):
+    def __init__(self, args, model_name):
         super().__init__()
+        global device
+        device = args.device
         self.model_name = model_name
         self.one_hot = 0
 
@@ -88,8 +91,10 @@ class CausalModel_law(PyroModule):
         return data_return
     
 class CausalModel_law_up(PyroModule):
-    def __init__(self, model_name):
+    def __init__(self, args, model_name):
         super().__init__()
+        global device 
+        device = args.device
         self.model_name = model_name
 
     def forward(self, data):
@@ -150,49 +155,51 @@ def argmax_withNan(x, dim=1):
     return None if x is None else torch.argmax(x, dim=dim)
 
 class CausalModel_adult(PyroModule):
-    def __init__(self, model_name):
+    def __init__(self, args, model_name):
         super().__init__()
         self.model_name = model_name
+        global device
+        device = args.device
 
     def forward(self, data):
         data_Race, data_Sex, data_MaritalStatus, data_Occupation, data_EducationNum, data_HoursPerWeek, data_Income = data['Race'], \
                  data['Sex'], data['MaritalStatus'], data['Occupation'], data['EducationNum'], data['HoursPerWeek'], data['Income']
         data_Race = data_Race.view(-1, 1)
 
-        self.pi_Race = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.4, 0.3, 0.3]).to(device))
-        self.pi_Sex = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.5, 0.5]).to(device))
+        self.pi_Race = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.4, 0.3, 0.3])).to(device)
+        self.pi_Sex = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.5, 0.5])).to(device)
 
         # marital status: ~ categorical, logits = wx + b
         m_size = 7 if data_MaritalStatus is None else data_MaritalStatus.shape[1]
-        self.w_mar_race = pyro.param("w_mar_race", torch.zeros(data_Race.shape[1], m_size).to(device))  # d x d'
-        self.w_mar_sex = pyro.param("w_mar_sex", torch.zeros(data_Sex.shape[1], m_size).to(device))
+        self.w_mar_race = pyro.param("w_mar_race", torch.zeros(data_Race.shape[1], m_size)).to(device)  # d x d'
+        self.w_mar_sex = pyro.param("w_mar_sex", torch.zeros(data_Sex.shape[1], m_size)).to(device)
 
         # education: Normal (better after standardization) ~ N(mean, 1), mean = wx + eps_edu
         e_size = 1 if data_EducationNum is None else data_EducationNum.shape[1]
-        self.w_edu_race = pyro.param("w_edu_race", torch.zeros(data_Race.shape[1], 1).to(device))  # d x 1
-        self.w_edu_sex = pyro.param("w_edu_sex", torch.zeros(data_Sex.shape[1], 1).to(device))  # d x 1
+        self.w_edu_race = pyro.param("w_edu_race", torch.zeros(data_Race.shape[1], 1)).to(device)  # d x 1
+        self.w_edu_sex = pyro.param("w_edu_sex", torch.zeros(data_Sex.shape[1], 1)).to(device)  # d x 1
 
         # hour per week
         h_size = 1 if data_HoursPerWeek is None else data_HoursPerWeek.shape[1]
-        self.w_hour_race = pyro.param("w_hour_race", torch.zeros(data_Race.shape[1], 1).to(device))  # d x 1
-        self.w_hour_sex = pyro.param("w_hour_sex", torch.zeros(data_Sex.shape[1], 1).to(device))
-        self.w_hour_mar = pyro.param("w_hour_mar", torch.zeros(m_size, 1).to(device))
-        self.w_hour_edu = pyro.param("w_hour_edu", torch.zeros(e_size, 1).to(device))
+        self.w_hour_race = pyro.param("w_hour_race", torch.zeros(data_Race.shape[1], 1)).to(device)  # d x 1
+        self.w_hour_sex = pyro.param("w_hour_sex", torch.zeros(data_Sex.shape[1], 1)).to(device)
+        self.w_hour_mar = pyro.param("w_hour_mar", torch.zeros(m_size, 1)).to(device)
+        self.w_hour_edu = pyro.param("w_hour_edu", torch.zeros(e_size, 1)).to(device)
 
         # occupation
         o_size = 14 if data_Occupation is None else data_Occupation.shape[1]
-        self.w_occ_race = pyro.param("w_occ_race", torch.zeros(data_Race.shape[1], o_size).to(device))  # d x d'
-        self.w_occ_sex = pyro.param("w_occ_sex", torch.zeros(data_Sex.shape[1], o_size).to(device))
-        self.w_occ_mar = pyro.param("w_occ_mar", torch.zeros(m_size, o_size).to(device))
-        self.w_occ_edu = pyro.param("w_occ_edu", torch.zeros(e_size, o_size).to(device))
+        self.w_occ_race = pyro.param("w_occ_race", torch.zeros(data_Race.shape[1], o_size)).to(device)  # d x d'
+        self.w_occ_sex = pyro.param("w_occ_sex", torch.zeros(data_Sex.shape[1], o_size)).to(device)
+        self.w_occ_mar = pyro.param("w_occ_mar", torch.zeros(m_size, o_size)).to(device)
+        self.w_occ_edu = pyro.param("w_occ_edu", torch.zeros(e_size, o_size)).to(device)
 
         # income
-        self.w_income_race = pyro.param("w_income_race", torch.zeros(data_Race.shape[1], 2).to(device))  # d x 2
-        self.w_income_sex = pyro.param("w_income_sex", torch.zeros(data_Sex.shape[1], 2).to(device))
-        self.w_income_mar = pyro.param("w_income_mar", torch.zeros(m_size, 2).to(device))
-        self.w_income_edu = pyro.param("w_income_edu", torch.zeros(e_size, 2).to(device))
-        self.w_income_hour = pyro.param("w_income_hour", torch.zeros(h_size, 2).to(device))
-        self.w_income_occ = pyro.param("w_income_occ", torch.zeros(o_size, 2).to(device))
+        self.w_income_race = pyro.param("w_income_race", torch.zeros(data_Race.shape[1], 2)).to(device)  # d x 2
+        self.w_income_sex = pyro.param("w_income_sex", torch.zeros(data_Sex.shape[1], 2)).to(device)
+        self.w_income_mar = pyro.param("w_income_mar", torch.zeros(m_size, 2)).to(device)
+        self.w_income_edu = pyro.param("w_income_edu", torch.zeros(e_size, 2)).to(device)
+        self.w_income_hour = pyro.param("w_income_hour", torch.zeros(h_size, 2)).to(device)
+        self.w_income_occ = pyro.param("w_income_occ", torch.zeros(o_size, 2)).to(device)
 
         n = len(data_Race)
 
@@ -239,95 +246,127 @@ class CausalModel_adult(PyroModule):
                        'Race': Race, 'Sex': Sex
                        }
         return data_return
-    
+
+
 class CausalModel_adult_up(PyroModule):
-    def __init__(self, model_name):
+    def __init__(self, args, model_name):
         super().__init__()
         self.model_name = model_name
+        global device
+        device = args.device
 
     def forward(self, data):
+        data_len = data['Race'].shape[0]
         data_Race, data_Sex, data_MaritalStatus, data_Occupation, data_EducationNum, data_HoursPerWeek, data_Income = data['Race'], \
                  data['Sex'], data['MaritalStatus'], data['Occupation'], data['EducationNum'], data['HoursPerWeek'], data['Income']
         data_Race = data_Race.view(-1, 1)
 
-        self.pi_Race = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.4, 0.3, 0.3]).to(device))
-        self.pi_Sex = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.5, 0.5]).to(device))
+        self.pi_Race = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.4, 0.3, 0.3]), constraint=constraints.positive).to(device)
+        self.pi_Sex = pyro.param(self.model_name + "_" + "pi", torch.tensor([0.5, 0.5]), constraint=constraints.positive).to(device)
 
         # marital status: ~ categorical, logits = wx + b
         m_size = 7 if data_MaritalStatus is None else data_MaritalStatus.shape[1]
-        self.w_mar_race = pyro.param("w_mar_race", torch.zeros(data_Race.shape[1], m_size).to(device))  # d x d'
-        self.w_mar_sex = pyro.param("w_mar_sex", torch.zeros(data_Sex.shape[1], m_size).to(device))
+        self.w_mar_race = pyro.param("w_mar_race", torch.zeros(data_Race.shape[1], m_size)).to(device)  # d x d'
+
+        self.w_mar_sex = pyro.param("w_mar_sex", torch.zeros(data_Sex.shape[1], m_size)).to(device)
 
         # education: Normal (better after standardization) ~ N(mean, 1), mean = wx + eps_edu
         e_size = 1 if data_EducationNum is None else data_EducationNum.shape[1]
-        self.w_edu_race = pyro.param("w_edu_race", torch.zeros(data_Race.shape[1], 1).to(device))  # d x 1
-        self.w_edu_sex = pyro.param("w_edu_sex", torch.zeros(data_Sex.shape[1], 1).to(device))  # d x 1
+        self.w_edu_race = pyro.param("w_edu_race", torch.zeros(data_Race.shape[1], 1)).to(device)  # d x 1
+        self.w_edu_sex = pyro.param("w_edu_sex", torch.zeros(data_Sex.shape[1], 1)).to(device)  # d x 1
 
         # hour per week
         h_size = 1 if data_HoursPerWeek is None else data_HoursPerWeek.shape[1]
-        self.w_hour_race = pyro.param("w_hour_race", torch.zeros(data_Race.shape[1], 1).to(device))  # d x 1
-        self.w_hour_sex = pyro.param("w_hour_sex", torch.zeros(data_Sex.shape[1], 1).to(device))
-        self.w_hour_mar = pyro.param("w_hour_mar", torch.zeros(m_size, 1).to(device))
-        self.w_hour_edu = pyro.param("w_hour_edu", torch.zeros(e_size, 1).to(device))
+        self.w_hour_race = pyro.param("w_hour_race", torch.zeros(data_Race.shape[1], 1)).to(device)  # d x 1
+        self.w_hour_sex = pyro.param("w_hour_sex", torch.zeros(data_Sex.shape[1], 1)).to(device)
+        self.w_hour_mar = pyro.param("w_hour_mar", torch.zeros(m_size, 1)).to(device)
+        self.w_hour_edu = pyro.param("w_hour_edu", torch.zeros(e_size, 1)).to(device)
 
         # occupation
         o_size = 14 if data_Occupation is None else data_Occupation.shape[1]
-        self.w_occ_race = pyro.param("w_occ_race", torch.zeros(data_Race.shape[1], o_size).to(device))  # d x d'
-        self.w_occ_sex = pyro.param("w_occ_sex", torch.zeros(data_Sex.shape[1], o_size).to(device))
-        self.w_occ_mar = pyro.param("w_occ_mar", torch.zeros(m_size, o_size).to(device))
-        self.w_occ_edu = pyro.param("w_occ_edu", torch.zeros(e_size, o_size).to(device))
+        self.w_occ_race = pyro.param("w_occ_race", torch.zeros(data_Race.shape[1], o_size)).to(device)  # d x d'
+        self.w_occ_sex = pyro.param("w_occ_sex", torch.zeros(data_Sex.shape[1], o_size)).to(device)
+        self.w_occ_mar = pyro.param("w_occ_mar", torch.zeros(m_size, o_size)).to(device)
+        self.w_occ_edu = pyro.param("w_occ_edu", torch.zeros(e_size, o_size)).to(device)
 
         # income
-        self.w_income_race = pyro.param("w_income_race", torch.zeros(data_Race.shape[1], 2).to(device))  # d x 2
-        self.w_income_sex = pyro.param("w_income_sex", torch.zeros(data_Sex.shape[1], 2).to(device))
-        self.w_income_mar = pyro.param("w_income_mar", torch.zeros(m_size, 2).to(device))
-        self.w_income_edu = pyro.param("w_income_edu", torch.zeros(e_size, 2).to(device))
-        self.w_income_hour = pyro.param("w_income_hour", torch.zeros(h_size, 2).to(device))
-        self.w_income_occ = pyro.param("w_income_occ", torch.zeros(o_size, 2).to(device))
+        self.w_income_race = pyro.param("w_income_race", torch.zeros(data_Race.shape[1], 2)).to(device)  # d x 2
+        self.w_income_sex = pyro.param("w_income_sex", torch.zeros(data_Sex.shape[1], 2)).to(device)
+        self.w_income_mar = pyro.param("w_income_mar", torch.zeros(m_size, 2)).to(device)
+        self.w_income_edu = pyro.param("w_income_edu", torch.zeros(e_size, 2)).to(device)
+        self.w_income_hour = pyro.param("w_income_hour", torch.zeros(h_size, 2)).to(device)
+        self.w_income_occ = pyro.param("w_income_occ", torch.zeros(o_size, 2)).to(device)
+        
+        self.eps_sp = pyro.param(self.model_name + "_" + "eps_sp", torch.tensor(0.)).to(device)
+        self.w_sp_eps1 = pyro.param(self.model_name + "_" + "w_sp_eps1", torch.zeros(1, 1)).to(device)
+        self.w_sp_eps2 = pyro.param(self.model_name + "_" + "w_sp_eps2", torch.zeros(1, 1)).to(device)
+        self.w_sp_eps3 = pyro.param(self.model_name + "_" + "w_sp_eps3", torch.zeros(1, 1)).to(device)
+        self.w_sp_eps4 = pyro.param(self.model_name + "_" + "w_sp_eps4", torch.zeros(1, 1)).to(device)
+        self.w_sp_eps5 = pyro.param(self.model_name + "_" + "w_sp_eps5", torch.zeros(1, 1)).to(device)
+        
+        self.w_race_sp = pyro.param(self.model_name + "_" + "w_race_sp", torch.zeros(1, 1)).to(device)
+        self.eps_race = pyro.param(self.model_name + "_" + "eps_race", torch.tensor(0.)).to(device)
+        self.w_mar_sp = pyro.param(self.model_name + "_" + "w_mar_sp", torch.zeros(1, m_size)).to(device)
+        self.w_occ_sp = pyro.param(self.model_name + "_" + "w_occ_sp", torch.zeros(1, o_size)).to(device)
+        self.w_edu_sp = pyro.param(self.model_name + "_" + "w_edu_sp", torch.zeros(1, e_size)).to(device)
+        self.w_hour_sp = pyro.param(self.model_name + "_" + "w_hour_sp", torch.zeros(1, h_size)).to(device)
+        self.w_income_sp = pyro.param(self.model_name + "_" + "w_income_sp", torch.zeros(1, 2)).to(device)
+        
+        self.b_spp = pyro.param(self.model_name + "_" + "b_spp", torch.tensor(0.)).to(device)
+        self.w_spp_f = pyro.param(self.model_name + "_" + "w_spp_f", torch.tensor(0.)).to(device)
 
         n = len(data_Race)
 
         with pyro.plate('observe_data', size=n, device=device):
-            Race = pyro.sample('obs_Race', pyro.distributions.Categorical(self.pi_Race), obs=data_Race.view(-1)).view(-1, 1) # S ~ Categorical(pi)
+            eps_MaritalStatus = pyro.sample('eps_MaritalStatus', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
+            eps_EducationNum = pyro.sample('eps_EducationNum', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
+            eps_HoursPerWeek = pyro.sample('eps_HoursPerWeek', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
+            eps_Occupation = pyro.sample('eps_Occupation', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
+            eps_Income = pyro.sample('eps_Income', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)  # n x 1
+            sp_mean = self.eps_sp + torch.matmul(eps_MaritalStatus, self.w_sp_eps1) + torch.matmul(eps_EducationNum, self.w_sp_eps2) \
+                + torch.matmul(eps_HoursPerWeek, self.w_sp_eps3) + torch.matmul(eps_Occupation, self.w_sp_eps4) + torch.matmul(eps_Income, self.w_sp_eps5)
+            sp = pyro.sample('sp', pyro.distributions.Normal(sp_mean.view(-1).to(device), 1.)).view(-1, 1)  # n x 1
+            
+            race_mean = self.eps_race + torch.matmul(sp, self.w_race_sp)
+            Race = pyro.sample('obs_Race', pyro.distributions.Normal(race_mean.view(-1), 1.), obs=data_Race.view(-1)).view(data_len, -1)  # S <- S'
             Sex = pyro.sample('obs_Sex', pyro.distributions.Categorical(self.pi_Sex), obs=torch.argmax(data_Sex, dim=1)).to(device)  # n, raw data
             Sex = F.one_hot(Sex, num_classes=data_Sex.shape[1]).float()  # raw -> one hot, n x d
-
-            eps_MaritalStatus = pyro.sample('eps_MaritalStatus', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
             MaritalStatus_logit = torch.softmax((torch.tile(eps_MaritalStatus, (1, m_size)) + torch.matmul(Race, self.w_mar_race) +
-                                                torch.matmul(Sex, self.w_mar_sex)), dim=1)  # n x d_mar
+                                                torch.matmul(Sex, self.w_mar_sex) + torch.matmul(sp, self.w_mar_sp)), dim=1)  # n x d_mar
             MaritalStatus = pyro.sample('obs_MaritalStatus', pyro.distributions.Categorical(MaritalStatus_logit),
                                         obs=argmax_withNan(data_MaritalStatus, dim=1)).to(device)   # n
             MaritalStatus = F.one_hot(MaritalStatus, num_classes=m_size).float()  # n x d
 
-            eps_EducationNum = pyro.sample('eps_EducationNum', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
-            EducationNum_mean = torch.matmul(Race, self.w_edu_race) + torch.matmul(Sex, self.w_edu_sex) + eps_EducationNum  # n x 1
+            
+            EducationNum_mean = torch.matmul(Race, self.w_edu_race) + torch.matmul(Sex, self.w_edu_sex) + torch.matmul(sp, self.w_edu_sp) + eps_EducationNum  # n x 1
             EducationNum = pyro.sample("obs_EducationNum", pyro.distributions.Normal(EducationNum_mean.view(-1), 1.0), obs=quickprocess(data_EducationNum)).view(-1,1)  # n x 1
 
-            eps_HoursPerWeek = pyro.sample('eps_HoursPerWeek', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
+            
             HoursPerWeek_mean = torch.matmul(Race, self.w_hour_race) + torch.matmul(Sex, self.w_hour_sex) + \
-                                torch.matmul(MaritalStatus, self.w_hour_mar) + torch.matmul(EducationNum, self.w_hour_edu) + eps_HoursPerWeek
+                                torch.matmul(MaritalStatus, self.w_hour_mar) + torch.matmul(EducationNum, self.w_hour_edu) + torch.matmul(sp, self.w_hour_sp) + eps_HoursPerWeek
             HoursPerWeek = pyro.sample("obs_HoursPerWeek", pyro.distributions.Normal(HoursPerWeek_mean.view(-1), 1.0), obs=quickprocess(data_HoursPerWeek)).view(-1,1)  # n x 1
 
-            eps_Occupation = pyro.sample('eps_Occupation', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)
             Occupation_logit = torch.softmax((torch.tile(eps_Occupation, (1, o_size)) +
                                               torch.matmul(Race, self.w_occ_race) + torch.matmul(Sex, self.w_occ_sex) +
-                                              torch.matmul(EducationNum, self.w_occ_edu) + torch.matmul(MaritalStatus, self.w_occ_mar)), dim=1)  # n x d
+                                              torch.matmul(EducationNum, self.w_occ_edu) + torch.matmul(MaritalStatus, self.w_occ_mar) + torch.matmul(sp, self.w_occ_sp)), dim=1)  # n x d
             Occupation = pyro.sample('obs_Occupation', pyro.distributions.Categorical(Occupation_logit),
                                         obs=argmax_withNan(data_Occupation, dim=1)).to(device)  # n x 1
             Occupation = F.one_hot(Occupation, num_classes=o_size).float()  # n x d
 
-            eps_Income = pyro.sample('eps_Income', pyro.distributions.Normal(torch.tensor(0.).to(device), 1.)).view(-1, 1)  # n x 1
             Income_logit = torch.softmax((torch.tile(eps_Income, (1, 2)) + torch.matmul(Race, self.w_income_race) + torch.matmul(Sex, self.w_income_sex) +
                                          torch.matmul(MaritalStatus, self.w_income_mar) + torch.matmul(EducationNum, self.w_income_edu) +
-                                         torch.matmul(HoursPerWeek, self.w_income_hour) + torch.matmul(Occupation, self.w_income_occ)), dim=1)  # n x 2
+                                         torch.matmul(HoursPerWeek, self.w_income_hour) + torch.matmul(Occupation, self.w_income_occ) + torch.matmul(sp, self.w_income_sp)), dim=1)  # n x 2
             Income = pyro.sample('obs_Income', pyro.distributions.Categorical(Income_logit),
                                         obs=argmax_withNan(data_Income, dim=1)).to(device).view(-1, 1).float()  # n x 1
+            spp_mean = self.b_spp + self.w_spp_f * Income
+            spp = pyro.sample("spp", dist.Normal(spp_mean.view(-1), 1)).view(data_len, -1) # S" <- Y
+            
 
         data_return = {'eps_MaritalStatus': eps_MaritalStatus, 'eps_EducationNum': eps_EducationNum,
                        'eps_Occupation': eps_Occupation, 'eps_HoursPerWeek': eps_HoursPerWeek,
                        'eps_Income': eps_Income, 'MaritalStatus': MaritalStatus, 'Occupation': Occupation,
                        'EducationNum': EducationNum, 'HoursPerWeek': HoursPerWeek, 'Income': Income,
-                       'Race': Race, 'Sex': Sex
+                       'Race': Race, 'Sex': Sex, 'sp': sp, 'spp': spp
                        }
         return data_return
     
