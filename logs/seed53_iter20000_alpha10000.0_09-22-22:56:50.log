@@ -1,0 +1,21 @@
+2024-09-22 22:56:50,548: Namespace(cudanum=7, dataset='adult', synthetic=1, seed=53, training=1, pyromodel='models_save/cfpup.pt', pyroparam='models_save/cfpup_param.pt', lrcausalmodel=0.001, alpha=10000.0, num_iterations_causalmodel=20000, epochs_vae=10, decoder_type='together', lr=0.002)
+2024-09-22 22:56:50,549: Namespace(cudanum=7, dataset='adult', synthetic=1, seed=53, training=1, pyromodel='models_save/cfpup.pt', pyroparam='models_save/cfpup_param.pt', lrcausalmodel=0.001, alpha=10000.0, num_iterations_causalmodel=20000, epochs_vae=10, decoder_type='together', lr=0.002)
+2024-09-22 22:56:50,702: =========== evaluation for constant predictor ================: {'F1-score': 0.0, 'Accuracy': 0.7456111295130838}
+2024-09-22 22:56:50,825: =========== evaluation for full predictor ================: {'F1-score': 0.6514759192128431, 'Accuracy': 0.7770785028155018}
+2024-09-22 22:56:50,947: =========== evaluation for unaware predictor ================: {'F1-score': 0.6518134715025907, 'Accuracy': 0.7774097383239483}
+2024-09-22 22:56:53,704: [iteration 0001] loss: 1230.2229
+2024-09-22 22:57:12,035: [iteration 1001] loss: 664.1058
+2024-09-22 22:57:28,526: [iteration 2001] loss: 347.4398
+2024-09-22 22:57:45,275: [iteration 3001] loss: 192.9700
+2024-09-22 22:58:01,867: [iteration 4001] loss: 132.1185
+2024-09-22 22:58:19,716: [iteration 5001] loss: 110.5446
+2024-09-22 22:58:37,556: [iteration 6001] loss: 99.0967
+2024-09-22 22:58:55,172: [iteration 7001] loss: 90.0680
+2024-09-22 22:59:12,402: [iteration 8001] loss: 82.6746
+2024-09-22 22:59:29,610: [iteration 9001] loss: 76.6243
+2024-09-22 22:59:46,588: [iteration 10001] loss: 71.6654
+2024-09-22 23:00:03,019: [iteration 11001] loss: 67.6011
+2024-09-22 23:00:19,439: [iteration 12001] loss: 64.3965
+2024-09-22 23:00:35,829: [iteration 13001] loss: 61.7795
+2024-09-22 23:00:52,237: [iteration 14001] loss: 59.6711
+2024-09-22 23:01:08,664: [iteration 15001] loss: 57.9173

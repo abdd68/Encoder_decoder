@@ -1,7 +1,0 @@
-2024-09-22 20:45:13,994: Namespace(cudanum=0, dataset='adult', synthetic=1, seed=498, training=1, pyromodel='models_save/cfpup.pt', pyroparam='models_save/cfpup_param.pt', lrcausalmodel=0.001, alpha=0.0, num_iterations_causalmodel=5000, epochs_vae=10, decoder_type='together', lr=0.002)
-2024-09-22 20:45:13,995: Namespace(cudanum=0, dataset='adult', synthetic=1, seed=498, training=1, pyromodel='models_save/cfpup.pt', pyroparam='models_save/cfpup_param.pt', lrcausalmodel=0.001, alpha=0.0, num_iterations_causalmodel=5000, epochs_vae=10, decoder_type='together', lr=0.002)
-2024-09-22 20:45:14,163: =========== evaluation for constant predictor ================: {'F1-score': 0.0, 'Accuracy': 0.7512421331566744}
-2024-09-22 20:45:14,305: =========== evaluation for full predictor ================: {'F1-score': 0.6514759192128431, 'Accuracy': 0.7770785028155018}
-2024-09-22 20:45:14,438: =========== evaluation for unaware predictor ================: {'F1-score': 0.6518134715025907, 'Accuracy': 0.7774097383239483}
-2024-09-22 20:45:16,092: [iteration 0001] loss: 1230.2072
-2024-09-22 20:45:32,121: [iteration 1001] loss: 664.2193

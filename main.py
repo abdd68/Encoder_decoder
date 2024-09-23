@@ -69,19 +69,43 @@ def get_cf_pred(model_name, model, data_cf_tst, s_cf):
             elif model_name == 'constant':
                 tst_size = len(data_cf_tst[si]['LSAT'])
                 y_pred_si = np.full((tst_size, 1), model)
-            elif model_name == 'cfpup' or model_name == 'cfpu':
-                x_fair = data_cf_tst[si]['knowledge'].view(-1, 1).cpu().detach().numpy()  # n x 1
+            elif model_name == 'cfpup':
+                if args.synthetic != 0:
+                    x_fair = data_cf_tst[si]['knowledge'].view(-1, 1).cpu().detach().numpy()  # n x 1
+                else:
+                    x_fair = data_cf_tst[si]['knowledge_cfpup'].view(-1, 1).cpu().detach().numpy()  # n x 1
+            elif model_name == 'cfpu':
+                if args.synthetic != 0:
+                    x_fair = data_cf_tst[si]['knowledge'].view(-1, 1).cpu().detach().numpy()  # n x 1
+                else:
+                    x_fair = data_cf_tst[si]['knowledge_cfpu'].view(-1, 1).cpu().detach().numpy()  # n x 1
                 
         elif args.dataset == 'adult':
             if model_name == 'full':
                 x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['MaritalStatus'],
                      data_cf_tst[si]['Occupation'], data_cf_tst[si]['EducationNum'],
                      data_cf_tst[si]['HoursPerWeek'], data_cf_tst[si]['Race']], dim=1).cpu().detach().numpy()
-            elif model_name == 'cfpup' or model_name == 'cfpu':
+            elif model_name == 'cfpu':
                 #x_fair = data_latent_list.cpu().detach().numpy()  # n x 1
-                x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['eps_MaritalStatus'],data_cf_tst[si]['eps_EducationNum'],
+                if args.synthetic != 0:
+                    x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['eps_MaritalStatus'],data_cf_tst[si]['eps_EducationNum'],
                                     data_cf_tst[si]['eps_Occupation'],data_cf_tst[si]['eps_HoursPerWeek'],
                                     data_cf_tst[si]['eps_Income']],dim=1).cpu().detach().numpy()  # n x 1
+                else:
+                    x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['eps_MaritalStatus_cfpu'],data_cf_tst[si]['eps_EducationNum_cfpu'],
+                                    data_cf_tst[si]['eps_Occupation_cfpu'],data_cf_tst[si]['eps_HoursPerWeek_cfpu'],
+                                    data_cf_tst[si]['eps_Income_cfpu']],dim=1).cpu().detach().numpy()  # n x 1
+                
+            elif model_name == 'cfpup':
+                #x_fair = data_latent_list.cpu().detach().numpy()  # n x 1
+                if args.synthetic != 0:
+                    x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['eps_MaritalStatus'],data_cf_tst[si]['eps_EducationNum'],
+                                    data_cf_tst[si]['eps_Occupation'],data_cf_tst[si]['eps_HoursPerWeek'],
+                                    data_cf_tst[si]['eps_Income']],dim=1).cpu().detach().numpy()  # n x 1
+                else:
+                    x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['eps_MaritalStatus_cfpup'],data_cf_tst[si]['eps_EducationNum_cfpup'],
+                                    data_cf_tst[si]['eps_Occupation_cfpup'],data_cf_tst[si]['eps_HoursPerWeek_cfpup'],
+                                    data_cf_tst[si]['eps_Income_cfpup']],dim=1).cpu().detach().numpy()  # n x 1
             elif model_name == 'unaware':
                 x_fair = torch.cat([data_cf_tst[si]['Sex'], data_cf_tst[si]['MaritalStatus'],
                                     data_cf_tst[si]['Occupation'], data_cf_tst[si]['EducationNum'],
@@ -179,14 +203,14 @@ def train_models(data_save, metrics_set, type='linear'):
     eval_unaware = evaluate_model(y[test_idx].reshape(-1), y_pred_tst_unaware, metrics_set)
     logger.info(f"=========== evaluation for unaware predictor ================: {eval_unaware}")
     
-    y_pred_cfpu, clf_cfpu = baselines.run_cfp_u(data_save, train_idx, test_idx, type, device)
+    y_pred_cfpu, clf_cfpu, data_return_cfpu = baselines.run_cfp_u(data_save, train_idx, test_idx, type, device)
     eval_cfpu = evaluate_model(y[test_idx].reshape(-1), y_pred_cfpu, metrics_set)
     logger.info(f"=========== evaluation for cfp_u predictor ================: {eval_cfpu}")
     
-    y_pred_cfpup, clf_cfpup = baselines.run_cfp_up(data_save, train_idx, test_idx, type, device)
+    y_pred_cfpup, clf_cfpup, data_return_cfpup = baselines.run_cfp_up(data_save, train_idx, test_idx, type, device)
     eval_cfpup = evaluate_model(y[test_idx].reshape(-1), y_pred_cfpup, metrics_set)
     logger.info(f"=========== evaluation for cfp_up predictor ================: {eval_cfpup}")
-    return {'clf_full': clf_full, 'clf_unaware': clf_unaware, 'constant_y': y_pred_tst_constant[0], 'clf_cfpu':clf_cfpu, 'clf_cfpup': clf_cfpup}
+    return {'clf_full': clf_full, 'clf_unaware': clf_unaware, 'constant_y': y_pred_tst_constant[0], 'clf_cfpu':clf_cfpu, 'clf_cfpup': clf_cfpup}, data_return_cfpu, data_return_cfpup
 
 def get_test_dataset(dataset, y_pred_cfpup):
     dataset_test ={}
@@ -340,31 +364,47 @@ def main(path):
         S_name = 'race'
         s_feature = [0.0, 1.0, 2.0]
     elif args.dataset == 'adult':
-        X_name = ['Sex', 'MaritalStatus', 'Occupation', 'EducationNum', 'HoursPerWeek']
-        Y_name = 'Income'
-        S_name = 'Race'
-        type_clf = 'logistic'
-        type_y = 'class'
         metrics_set = set({"Accuracy", 'F1-score'})
-        latent_names = ['eps_MaritalStatus', 'eps_EducationNum', 'eps_Occupation', 'eps_HoursPerWeek', 'eps_Income']
-        nondes_names = ['Sex']
-        des_name = ['MaritalStatus', 'Occupation', 'EducationNum', 'HoursPerWeek', 'Income']
-        s_name = ['Race']
+        S_name = 'Race'
         s_feature = [0.0, 1.0, 2.0]
     
     # performance analysis
-    models = train_models(dataset, metrics_set, 'linear')
+    models, latentData_cfpu, latentData_cfpup = train_models(dataset, metrics_set, 'linear')
+    latentData_cfpu = {key + '_cfpu': value.unsqueeze(1) for key, value in latentData_cfpu.items()}
+    latentData_cfpup = {key + '_cfpup': value.unsqueeze(1) for key, value in latentData_cfpup.items()}
     model_dict = {'constant': models['constant_y'], 'full': models['clf_full'],
                       'unaware': models['clf_unaware'], 'cfpu':models['clf_cfpu'], 'cfpup': models['clf_cfpup']}
     # fairness analysis
     # 1. Counterfactual model generation
     
-    
-    dataset_test_s = train_vae(dataset, S_name, s_feature, 'models_save/vae.pt')
-    dataset_test_s = [
-    {**item, S_name: torch.full((next(iter(item.values())).shape[0], 1), i).to(device)} 
-    for i, item in enumerate(dataset_test_s)
-    ]
+    if args.synthetic != 0:
+        dataset_test_s = train_vae(dataset, S_name, s_feature, 'models_save/vae.pt')
+        dataset_test_s = [
+        {**item, S_name: torch.full((next(iter(item.values())).shape[0], 1), i).to(device)} 
+        for i, item in enumerate(dataset_test_s)
+        ]
+    else:
+        data_save_test ={}
+        test_index = dataset['index']['tst_idx_list']
+        
+        dataset['data'].update(latentData_cfpu)
+        dataset['data'].update(latentData_cfpup)
+        if args.dataset == 'law':
+            for key, value in dataset['data'].items():
+                data_save_test[key] = value[test_index]
+            dataset_test_s = [
+                {key: torch.tensor(data_save_test[key][data_save_test[S_name] == r]) for key in data_save_test}
+                for r in s_feature
+                ]
+        elif args.dataset == 'adult':
+            for key, value in dataset['data'].items():
+                data_save_test[key] = value[test_index, :]
+            
+            dataset_test_s = [
+                {key: torch.tensor(data_save_test[key][data_save_test[S_name].view(-1) == r, :]) for key in data_save_test}
+                for r in s_feature
+                ]
+            
     for model_name in model_dict:
         model = model_dict[model_name]
         y_pred_cf = get_cf_pred(model_name, model, dataset_test_s, s_feature)  # list, size = S, each elem: n_select

@@ -80,8 +80,9 @@ def run_cfp_u(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
         
     model_linear.fit(x_fair_train, data_y_train.reshape(-1))  # train
     y_pred_test = model_linear.predict(x_fair_test)  # n_tst
+    
         
-    return y_pred_test, model_linear
+    return y_pred_test, model_linear, data_return
 
 def run_cfp_up(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
     if args.dataset == 'law':
@@ -113,7 +114,7 @@ def run_cfp_up(data_save, train_idx, test_idx, type='linear', device = 'cpu'):
     model_linear.fit(x_fair_train, data_y_train.reshape(-1))  # train
     y_pred_test = model_linear.predict(x_fair_test)  # n_tst
         
-    return y_pred_test, model_linear
+    return y_pred_test, model_linear, data_return
     
 def train_casual(model, data_save, train_idx):
     def get_train_set(data_save):
