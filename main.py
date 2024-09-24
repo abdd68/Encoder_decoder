@@ -40,9 +40,11 @@ parser.add_argument('--epochs_vae', type=int, default=10, metavar='N', help='num
 parser.add_argument('--decoder_type', default='together', help='decoder type in vae')  # 'together', 'separate'
 parser.add_argument('--lr', type=float, default=2e-3, help='learning rate for optimizer')
 args = parser.parse_args()
+
+syn = 'synthetic' if args.synthetic else 'real'
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO,  # 控制台打印的日志级别
-                    filename='logs/' + f"seed{args.seed}_" + f"iter{args.num_iterations_causalmodel}_" + f"alpha{args.alpha}_" + time.strftime('%m-%d-%H:%M:%S',time.localtime(time.time())) + '.log',
+                    filename='logs/' + f"{syn}_{args.dataset}_seed{args.seed}_" + f"iter{args.num_iterations_causalmodel}_" + f"alpha{args.alpha}_" + time.strftime('%m-%d-%H:%M:%S',time.localtime(time.time())) + '.log',
                     filemode='w',  
                     format='%(asctime)s: %(message)s'# 日志格式
                     )
